@@ -18,11 +18,14 @@
     "url": "https://vitalii-borisiuk.github.io/goit-js-hw-10/"
   },
   "dependencies": {
-    "modern-normalize": "^1.1.0"
+    "lodash.debounce": "^4.0.8",
+    "modern-normalize": "^1.1.0",
+    "notiflix": "^3.2.6",
+    "transformer-js": "^0.0.9"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",
-    "parcel": "^2.6.0",
+    "parcel": "^2.8.2",
     "parcel-reporter-clean-dist": "^1.0.4",
     "posthtml-include": "^1.7.4"
   },
