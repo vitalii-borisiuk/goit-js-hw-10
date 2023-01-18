@@ -21,6 +21,7 @@
     "lodash.debounce": "^4.0.8",
     "modern-normalize": "^1.1.0",
     "notiflix": "^3.2.6",
+    "parcel-transformer-hbs": "^1.0.3",
     "transformer-js": "^0.0.9"
   },
   "devDependencies": {
