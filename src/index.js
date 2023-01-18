@@ -1,32 +1,41 @@
 import './css/styles.css';
-import countryCardTpl from './template/countrycard.hbs'
+import { debounce } from 'lodash';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-
+import countryCardTpl from './template/countrycard.hbs'
+import { fetchCountries } from './js/fetchCountries.js'
 
 
 const DEBOUNCE_DELAY = 300;
 const refs = {
     cardContainer: document.querySelector('.country-info'),
     input: document.querySelector('#search-box'),
-}
+};
 
 
 function searchCountry(e) {
-    const el = e.currentTarget.value;
-    fetchCountryByName(el).then(renderCountryCard)
-        .catch((error) => Notify.failure('Oops, there is no country with that name'))
-        .finally(() => Notify.info('Too many matches found. Please enter a more specific name.'));
-}
+    const el = e.target.value;
+    fetchCountries(el)
+        .then(renderCountryCard)
+        .catch(onFetchError)
+};
+
 
 function renderCountryCard(countries) {
-     const country = countryCardTpl(...countries);
-     refs.cardContainer.innerHTML = country;
+
+    if (countries.length >= 10) {
+        Notify.info('Too many matches found. Please enter a more specific name.');
+    };
+
+    const country = countryCardTpl(...countries);
+        refs.cardContainer.innerHTML = country;
+
 };
 
-function fetchCountryByName(name) {
-    return fetch(`https://restcountries.com/v3.1/name/${name}`)
-        .then(response =>response.json());
-    
+
+
+function onFetchError() {
+    Notify.failure('Oops, there is no country with that name');
 };
 
-refs.input.addEventListener('input', searchCountry);
+
+refs.input.addEventListener('input', debounce(searchCountry, DEBOUNCE_DELAY));
