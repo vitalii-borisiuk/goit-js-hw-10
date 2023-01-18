@@ -1,16 +1,13 @@
 import './css/styles.css';
 import { debounce } from 'lodash';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import countryCardTpl from './template/countrycard.hbs'
-import { fetchCountries } from './js/fetchCountries.js'
+import countryCardTpl from './template/countrycard.hbs';
+import { fetchCountries } from './js/fetchCountries.js';
+import getRefs from './js/refs.js';
 
 
 const DEBOUNCE_DELAY = 300;
-const refs = {
-    cardContainer: document.querySelector('.country-info'),
-    input: document.querySelector('#search-box'),
-};
-
+const refs = getRefs();
 
 function searchCountry(e) {
     const el = e.target.value;
