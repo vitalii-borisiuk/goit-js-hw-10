@@ -11,9 +11,11 @@ const refs = getRefs();
 
 
 function searchCountry(e) {
-    const el = e.target.value;
-    const element = el.trim();
-    fetchCountries(element)
+  const inputValue = e.target.value.trim();
+  if (!inputValue) {
+    return;
+  }
+    fetchCountries(inputValue)
         .then(renderCountryCard)
         .catch(onFetchError)
 };
@@ -29,8 +31,9 @@ function searchCountry(e) {
       }; 
 };
 
-function onFetchError() {
-    Notify.failure('Oops, there is no country with that name');
+function onFetchError(error) {
+  Notify.failure('Oops, there is no country with that name');
+  console.log(error);
 };
 
 refs.input.addEventListener('input', debounce(searchCountry, DEBOUNCE_DELAY));
