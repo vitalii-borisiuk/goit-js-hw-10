@@ -32,8 +32,9 @@ function searchCountry(e) {
 };
 
 function onFetchError(error) {
+    console.log(error);
   Notify.failure('Oops, there is no country with that name');
-  console.log(error);
+
 };
 
 refs.input.addEventListener('input', debounce(searchCountry, DEBOUNCE_DELAY));
