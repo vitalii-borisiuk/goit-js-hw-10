@@ -32,7 +32,7 @@ function searchCountry(e) {
 };
 
 function onFetchError(error) {
-    console.log(error);
+  console.log(error);
   Notify.failure('Oops, there is no country with that name');
 
 };
