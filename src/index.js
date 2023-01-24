@@ -20,20 +20,28 @@ function searchCountry(e) {
         .catch(onFetchError)
 };
 
-  function renderCountryCard(countries) {
-    if (countries.length >= 1 && countries.length < 10) {
-    const markup = countries.map(country =>  countryCardTpl(country));
+function renderCountryCard(countries) {
+
+  if (countries.length >= 1 && countries.length < 10) {
+    const markup = countries.map(country => countryCardTpl(country));
     refs.cardContainer.innerHTML = markup.join('');
-    refs.cardContainerList.innerHTML = '';    
-    } 
-   if (countries.length >= 10) {
+    refs.cardContainerList.innerHTML = '';
+  }
+  else {
+     refs.cardContainer.innerHTML = '';
+  };
+
+          if (countries.length >= 10) { 
     Notify.info('Too many matches found. Please enter a more specific name.');
       }; 
 };
 
 function onFetchError(error) {
-  console.log(error);
+  console.log(error.message);
   Notify.failure('Oops, there is no country with that name');
+      refs.cardContainer.innerHTML = '';  
+  
+  
 
 };
 
